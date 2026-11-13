@@ -18,6 +18,9 @@ test('renders 26 matching labels and cards without script errors', async ({ page
 });
 
 test('every outcome is reachable and repeated spins match the physical pointer', async ({ page }) => {
+  // This deliberately performs 28 complete UI interactions. Give slower shared
+  // runners room for the whole sequence without relaxing individual assertions.
+  test.setTimeout(60000);
   await page.goto('/');
   const button = page.locator('#spin');
   await expect(button).toBeEnabled();
